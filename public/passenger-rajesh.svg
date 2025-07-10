@@ -1,0 +1,26 @@
+<svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background -->
+  <circle cx="16" cy="16" r="16" fill="#e5e7eb"/>
+  
+  <!-- Face -->
+  <circle cx="16" cy="14" r="7" fill="#d4a574"/>
+  
+  <!-- Hair -->
+  <path d="M9 12c0-5 3-9 7-9s7 4 7 9c0-1.5-1-3-2.5-3s-3 1-3 2.5c0-0.5-0.5-1.5-1.5-1.5s-1.5 1-1.5 1.5c0-1.5-1.5-2.5-3-2.5s-2.5 1.5-2.5 3z" fill="#2d1810"/>
+  
+  <!-- Eyes -->
+  <circle cx="13.5" cy="13" r="0.8" fill="#000"/>
+  <circle cx="18.5" cy="13" r="0.8" fill="#000"/>
+  
+  <!-- Mustache -->
+  <path d="M14.5 15.5c1 0.5 2.5 0.5 3 0" stroke="#2d1810" stroke-width="0.8" stroke-linecap="round"/>
+  
+  <!-- Smile -->
+  <path d="M14 16.5c1 1 3 1 4 0" stroke="#000" stroke-width="0.5" stroke-linecap="round" fill="none"/>
+  
+  <!-- Shirt -->
+  <path d="M9 22c0-3 2-5 7-5s7 2 7 5v10H9v-10z" fill="#3b82f6"/>
+  
+  <!-- Collar -->
+  <path d="M12 22c1-1 2-1 4-1s3 0 4 1" stroke="#1e40af" stroke-width="0.5" fill="none"/>
+</svg>
