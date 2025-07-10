@@ -14,6 +14,7 @@ const orders = [
     rating: "4.8",
     reviewCount: "739",
     passengerName: "Rajesh K.",
+    passengerAvatar: "/passenger-rajesh.svg",
     badge: "great-price",
   },
   {
@@ -25,6 +26,7 @@ const orders = [
     rating: "4.6",
     reviewCount: "203",
     passengerName: "Priya S.",
+    passengerAvatar: "/passenger-priya.svg",
     badge: null,
   },
   {
@@ -36,6 +38,7 @@ const orders = [
     rating: "4.9",
     reviewCount: "156",
     passengerName: "Amit L.",
+    passengerAvatar: "/passenger-amit.svg",
     badge: "surge",
   },
   {
@@ -47,6 +50,7 @@ const orders = [
     rating: "4.7",
     reviewCount: "892",
     passengerName: "Sarah M.",
+    passengerAvatar: "/passenger-sarah.svg",
     badge: null,
   },
 ];
@@ -80,16 +84,16 @@ const SwipeToAccept: React.FC<SwipeToAcceptProps> = ({ orderId, onAccept }) => {
     const containerRect = containerRef.current.getBoundingClientRect();
     const deltaX = clientX - startXRef.current;
     const progress = Math.min(Math.max(deltaX / MAX_SLIDE_DISTANCE, 0), 1);
-    
+
     setSwipeProgress(progress);
     currentXRef.current = clientX;
   };
 
   const handleEnd = () => {
     if (!isDragging || isAccepted) return;
-    
+
     setIsDragging(false);
-    
+
     if (swipeProgress >= ACCEPTANCE_THRESHOLD) {
       setIsAccepted(true);
       setSwipeProgress(1);
@@ -139,24 +143,24 @@ const SwipeToAccept: React.FC<SwipeToAcceptProps> = ({ orderId, onAccept }) => {
     };
 
     if (isDragging) {
-      document.addEventListener('mousemove', handleGlobalMouseMove);
-      document.addEventListener('mouseup', handleGlobalMouseUp);
+      document.addEventListener("mousemove", handleGlobalMouseMove);
+      document.addEventListener("mouseup", handleGlobalMouseUp);
     }
 
     return () => {
-      document.removeEventListener('mousemove', handleGlobalMouseMove);
-      document.removeEventListener('mouseup', handleGlobalMouseUp);
+      document.removeEventListener("mousemove", handleGlobalMouseMove);
+      document.removeEventListener("mouseup", handleGlobalMouseUp);
     };
   }, [isDragging, swipeProgress]);
 
   const getSliderText = () => {
-    if (isAccepted) return 'Order Accepted!';
-    if (swipeProgress >= ACCEPTANCE_THRESHOLD) return 'Release to Accept';
-    return 'Swipe to Accept Order';
+    if (isAccepted) return "Order Accepted!";
+    if (swipeProgress >= ACCEPTANCE_THRESHOLD) return "Release to Accept";
+    return "Swipe to Accept Order";
   };
 
   return (
-    <div 
+    <div
       ref={containerRef}
       className="relative h-12 bg-gray-100 rounded-full overflow-hidden cursor-pointer select-none touch-none"
       onMouseDown={handleMouseDown}
@@ -165,39 +169,43 @@ const SwipeToAccept: React.FC<SwipeToAcceptProps> = ({ orderId, onAccept }) => {
       onTouchEnd={handleTouchEnd}
     >
       {/* Progress background */}
-      <div 
+      <div
         className={`absolute inset-0 transition-all duration-300 ease-out`}
-        style={{ 
+        style={{
           background: `linear-gradient(to right, #c1f11d, #a8d919)`,
           width: `${swipeProgress * 100}%`,
-          opacity: swipeProgress > 0 ? 1 : 0
+          opacity: swipeProgress > 0 ? 1 : 0,
         }}
       />
-      
+
       {/* Slider button */}
-      <div 
+      <div
         className={`absolute left-1 top-1 w-10 h-10 bg-white rounded-full shadow-lg flex items-center justify-center z-10 transition-all duration-300 ease-out ${
-          isDragging ? 'scale-110' : 'scale-100'
-        } ${isAccepted ? 'bg-[#c1f11d]' : 'bg-white'}`}
-        style={{ 
+          isDragging ? "scale-110" : "scale-100"
+        } ${isAccepted ? "bg-[#c1f11d]" : "bg-white"}`}
+        style={{
           transform: `translateX(${swipeProgress * MAX_SLIDE_DISTANCE}px)`,
-          transition: isDragging ? 'scale 0.2s ease-out' : 'all 0.3s ease-out'
+          transition: isDragging ? "scale 0.2s ease-out" : "all 0.3s ease-out",
         }}
       >
-        <ArrowRight className={`w-5 h-5 transition-colors duration-300 ${
-          isAccepted ? 'text-white' : 'text-black'
-        }`} />
+        <ArrowRight
+          className={`w-5 h-5 transition-colors duration-300 ${
+            isAccepted ? "text-white" : "text-black"
+          }`}
+        />
       </div>
-      
+
       {/* Text */}
       <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-        <span className={`font-medium transition-all duration-300 text-sm ${
-          swipeProgress > 0.3 ? 'text-black' : 'text-gray-600'
-        } ${isAccepted ? 'text-black font-semibold' : ''}`}>
+        <span
+          className={`font-medium transition-all duration-300 text-sm ${
+            swipeProgress > 0.3 ? "text-black" : "text-gray-600"
+          } ${isAccepted ? "text-black font-semibold" : ""}`}
+        >
           {getSliderText()}
         </span>
       </div>
-      
+
       {/* Ripple effect when accepted */}
       {isAccepted && (
         <div className="absolute inset-0 bg-[#c1f11d] rounded-full animate-ping opacity-75" />
@@ -210,19 +218,19 @@ export const OrdersListSection = (): JSX.Element => {
   const [acceptedOrders, setAcceptedOrders] = useState<Set<number>>(new Set());
   const [navigationModal, setNavigationModal] = useState<{
     isOpen: boolean;
-    order: typeof orders[0] | null;
+    order: (typeof orders)[0] | null;
   }>({ isOpen: false, order: null });
   const [bidModal, setBidModal] = useState<{
     isOpen: boolean;
-    order: typeof orders[0] | null;
+    order: (typeof orders)[0] | null;
   }>({ isOpen: false, order: null });
 
   const handleAcceptOrder = (orderId: number) => {
     console.log(`Order ${orderId} accepted!`);
-    setAcceptedOrders(prev => new Set([...prev, orderId]));
-    
+    setAcceptedOrders((prev) => new Set([...prev, orderId]));
+
     // Find the accepted order and show navigation modal
-    const acceptedOrder = orders.find(order => order.id === orderId);
+    const acceptedOrder = orders.find((order) => order.id === orderId);
     if (acceptedOrder) {
       setTimeout(() => {
         setNavigationModal({ isOpen: true, order: acceptedOrder });
@@ -234,7 +242,7 @@ export const OrdersListSection = (): JSX.Element => {
     setNavigationModal({ isOpen: false, order: null });
   };
 
-  const handleOpenBidModal = (order: typeof orders[0]) => {
+  const handleOpenBidModal = (order: (typeof orders)[0]) => {
     setBidModal({ isOpen: true, order });
   };
 
@@ -251,7 +259,7 @@ export const OrdersListSection = (): JSX.Element => {
 
   const renderBadge = (badge: string | null) => {
     if (!badge) return null;
-    
+
     if (badge === "great-price") {
       return (
         <div className="flex items-center gap-1 bg-[#c1f11d] px-2 py-1 rounded-full">
@@ -260,7 +268,7 @@ export const OrdersListSection = (): JSX.Element => {
         </div>
       );
     }
-    
+
     if (badge === "surge") {
       return (
         <div className="flex items-center gap-1 bg-red-500 px-2 py-1 rounded-full">
@@ -269,84 +277,109 @@ export const OrdersListSection = (): JSX.Element => {
         </div>
       );
     }
-    
+
     return null;
   };
 
   return (
     <section className="flex flex-col w-full max-w-[360px] gap-4 p-4 bg-white">
-      {orders.filter(order => !acceptedOrders.has(order.id)).map((order) => (
-        <div
-          key={order.id}
-          className="bg-white rounded-2xl shadow-lg border border-gray-200 overflow-hidden hover:shadow-xl active:scale-[0.98] transition-all duration-200 cursor-pointer"
-          onClick={() => handleOpenBidModal(order)}
-        >
-          {/* Header with Price, Distance, and Badge */}
-          <div className="flex items-center justify-between p-4 pb-2">
-            <div className="flex items-center gap-3">
-              <span className={`text-2xl font-bold ${
-                order.badge === "surge" ? "text-red-500" : "text-black"
-              }`}>
-                ${order.totalPrice}
-              </span>
-              {renderBadge(order.badge)}
+      {orders
+        .filter((order) => !acceptedOrders.has(order.id))
+        .map((order) => (
+          <div
+            key={order.id}
+            className="bg-white rounded-2xl shadow-lg border border-gray-200 overflow-hidden hover:shadow-xl active:scale-[0.98] transition-all duration-200 cursor-pointer"
+            onClick={() => handleOpenBidModal(order)}
+          >
+            {/* Header with Price, Distance, and Badge */}
+            <div className="flex items-center justify-between p-4 pb-2">
+              <div className="flex items-center gap-3">
+                <span
+                  className={`text-2xl font-bold ${
+                    order.badge === "surge" ? "text-red-500" : "text-black"
+                  }`}
+                >
+                  ${order.totalPrice}
+                </span>
+                {renderBadge(order.badge)}
+              </div>
+              <div className="flex items-center gap-1 bg-gray-100 px-3 py-1 rounded-full">
+                <span className="text-sm font-medium text-gray-700">
+                  {order.distance} km
+                </span>
+              </div>
             </div>
-            <div className="flex items-center gap-1 bg-gray-100 px-3 py-1 rounded-full">
-              <span className="text-sm font-medium text-gray-700">{order.distance} km</span>
-            </div>
-          </div>
 
-          {/* Route Information */}
-          <div className="px-4 pb-3">
-            <div className="flex items-center gap-3">
-              <div className="flex flex-col items-center gap-1">
-                <div className="w-3 h-3 bg-[#c1f11d] rounded-full"></div>
-                <div className="w-0.5 h-6 bg-gray-300"></div>
-                <div className="w-3 h-3 bg-black rounded-full"></div>
-              </div>
-              <div className="flex-1 space-y-2">
-                <div className="text-sm font-medium text-black truncate">
-                  {order.origin}
+            {/* Route Information */}
+            <div className="px-4 pb-3">
+              <div className="flex items-center gap-3">
+                <div className="flex flex-col items-center gap-1">
+                  <div className="w-3 h-3 bg-[#c1f11d] rounded-full"></div>
+                  <div className="w-0.5 h-6 bg-gray-300"></div>
+                  <div className="w-3 h-3 bg-black rounded-full"></div>
                 </div>
-                <div className="text-sm text-gray-600 truncate">
-                  {order.destination}
-                </div>
-              </div>
-            </div>
-          </div>
-
-          {/* Passenger Info */}
-          <div className="flex items-center justify-between px-4 pb-4">
-            <div className="flex items-center gap-3">
-              <div className="w-8 h-8 bg-gray-100 rounded-full flex items-center justify-center">
-                <User className="w-4 h-4 text-gray-600" />
-              </div>
-              <div>
-                <div className="text-sm font-medium text-black">{order.passengerName}</div>
-                <div className="flex items-center gap-1">
-                  <Star className="w-3 h-3 fill-[#c1f11d] text-[#c1f11d]" />
-                  <span className="text-xs text-gray-600">{order.rating} ({order.reviewCount})</span>
+                <div className="flex-1 space-y-2">
+                  <div className="text-sm font-medium text-black truncate">
+                    {order.origin}
+                  </div>
+                  <div className="text-sm text-gray-600 truncate">
+                    {order.destination}
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
 
-          {/* Swipe to Accept */}
-          <div className="px-4 pb-4">
-            <SwipeToAccept orderId={order.id} onAccept={handleAcceptOrder} />
+            {/* Passenger Info */}
+            <div className="flex items-center justify-between px-4 pb-4">
+              <div className="flex items-center gap-3">
+                <div className="w-8 h-8 bg-gray-100 rounded-full overflow-hidden flex items-center justify-center">
+                  <img
+                    src={order.passengerAvatar}
+                    alt={`${order.passengerName} avatar`}
+                    className="w-full h-full object-cover"
+                    onError={(e) => {
+                      // Fallback to User icon if image fails to load
+                      const target = e.target as HTMLImageElement;
+                      target.style.display = "none";
+                      const parent = target.parentElement;
+                      if (parent) {
+                        parent.innerHTML =
+                          '<svg class="w-4 h-4 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path></svg>';
+                      }
+                    }}
+                  />
+                </div>
+                <div>
+                  <div className="text-sm font-medium text-black">
+                    {order.passengerName}
+                  </div>
+                  <div className="flex items-center gap-1">
+                    <Star className="w-3 h-3 fill-[#c1f11d] text-[#c1f11d]" />
+                    <span className="text-xs text-gray-600">
+                      {order.rating} ({order.reviewCount})
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Swipe to Accept */}
+            <div className="px-4 pb-4">
+              <SwipeToAccept orderId={order.id} onAccept={handleAcceptOrder} />
+            </div>
           </div>
-        </div>
-      ))}
-      
+        ))}
+
       {acceptedOrders.size > 0 && (
         <div className="text-center py-4">
           <div className="inline-flex items-center gap-2 bg-[#c1f11d] text-black px-4 py-2 rounded-full text-sm font-medium">
             <div className="w-2 h-2 bg-black rounded-full animate-pulse"></div>
-            {acceptedOrders.size} order{acceptedOrders.size > 1 ? 's' : ''} accepted
+            {acceptedOrders.size} order{acceptedOrders.size > 1 ? "s" : ""}{" "}
+            accepted
           </div>
         </div>
       )}
-      
+
       {/* Navigation Modal */}
       {navigationModal.order && (
         <NavigationModal
@@ -355,7 +388,7 @@ export const OrdersListSection = (): JSX.Element => {
           order={navigationModal.order}
         />
       )}
-      
+
       {/* Bid Modal */}
       {bidModal.order && (
         <BidModal
