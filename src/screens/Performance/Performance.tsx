@@ -70,7 +70,7 @@ export function Performance() {
           <div className="flex items-center gap-3 mb-4">
             <div className="relative">
               <Avatar className="w-14 h-14 border-4 border-white shadow-lg">
-                <AvatarImage src="/photo6.png" alt="avatar" />
+                <AvatarImage src="/driver-avatar.svg" alt="driver avatar" />
                 <AvatarFallback className="bg-[#E6E6E6] text-[#7B5CFA]">
                   <User className="w-8 h-8" />
                 </AvatarFallback>
