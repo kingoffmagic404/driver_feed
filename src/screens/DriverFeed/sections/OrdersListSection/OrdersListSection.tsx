@@ -274,7 +274,7 @@ export const OrdersListSection = (): JSX.Element => {
 
     if (badge === "surge") {
       return (
-        <div className="flex items-center gap-1 bg-red-500 px-2 py-1 rounded-full">
+        <div className="flex items-center gap-1 bg-purple-500 px-2 py-1 rounded-full">
           <TrendingUp className="w-3 h-3 text-white" />
           <span className="text-xs font-medium text-white">Surge</span>
         </div>
@@ -299,7 +299,7 @@ export const OrdersListSection = (): JSX.Element => {
               <div className="flex items-center gap-3">
                 <span
                   className={`text-2xl font-bold ${
-                    order.badge === "surge" ? "text-red-500" : "text-black"
+                    order.badge === "surge" ? "text-purple-500" : "text-black"
                   }`}
                 >
                   ${order.totalPrice}
