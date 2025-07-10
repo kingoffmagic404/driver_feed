@@ -14,7 +14,8 @@ const orders = [
     rating: "4.8",
     reviewCount: "739",
     passengerName: "Rajesh K.",
-    passengerAvatar: "/passenger-rajesh.svg",
+    passengerAvatar:
+      "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=100&fit=crop&crop=face",
     badge: "great-price",
   },
   {
@@ -26,7 +27,8 @@ const orders = [
     rating: "4.6",
     reviewCount: "203",
     passengerName: "Priya S.",
-    passengerAvatar: "/passenger-priya.svg",
+    passengerAvatar:
+      "https://images.unsplash.com/photo-1494790108755-2616b612b5c5?w=100&h=100&fit=crop&crop=face",
     badge: null,
   },
   {
@@ -38,7 +40,8 @@ const orders = [
     rating: "4.9",
     reviewCount: "156",
     passengerName: "Amit L.",
-    passengerAvatar: "/passenger-amit.svg",
+    passengerAvatar:
+      "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=100&h=100&fit=crop&crop=face",
     badge: "surge",
   },
   {
@@ -50,7 +53,8 @@ const orders = [
     rating: "4.7",
     reviewCount: "892",
     passengerName: "Sarah M.",
-    passengerAvatar: "/passenger-sarah.svg",
+    passengerAvatar:
+      "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=100&h=100&fit=crop&crop=face",
     badge: null,
   },
 ];
