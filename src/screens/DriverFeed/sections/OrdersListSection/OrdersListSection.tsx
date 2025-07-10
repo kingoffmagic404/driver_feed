@@ -27,8 +27,7 @@ const orders = [
     rating: "4.6",
     reviewCount: "203",
     passengerName: "Priya S.",
-    passengerAvatar:
-      "https://images.unsplash.com/photo-1494790108755-2616b612b5c5?w=100&h=100&fit=crop&crop=face",
+    passengerAvatar: "https://randomuser.me/api/portraits/women/44.jpg",
     badge: null,
   },
   {
